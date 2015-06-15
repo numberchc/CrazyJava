@@ -10,23 +10,23 @@ import java.awt.TextField;
 public class GUIMain {
 
 	public static void main(String[] args) {
-		Frame f = new Frame("æµ‹è¯•çª—å£");
+		Frame f = new Frame("²âÊÔ´°¿Ú");
 		
 //		Panel p = new Panel();
 //		p.add(new TextField(20));
-//		p.add(new Button("pæµ‹è¯•çª—å£"));
+//		p.add(new Button("p²âÊÔ´°¿Ú"));
 //		f.add(p);
 		
 //		ScrollPane sp = new ScrollPane(ScrollPane.SCROLLBARS_ALWAYS);
 //		sp.add(new TextField(20));
-//		sp.add(new Button("spæµ‹è¯•çª—å£"));
+//		sp.add(new Button("sp²âÊÔ´°¿Ú"));
 //		f.add(sp);
 		
 		f.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 5));
 		for (int i = 0; i < 100; i++) {
-			f.add(new Button("ï¿½ï¿½Å¥"+i));
+			f.add(new Button("°´Å¥" + i));
 		}
-		//è®¾ç½®çª—å£ä¸ºæœ€ä½³å¤§å°
+		//ÉèÖÃ´°¿ÚÎª×î¼Ñ´óĞ¡
 		f.pack();
 		f.setVisible(true);
 	}
