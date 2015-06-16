@@ -8,12 +8,13 @@ import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.ScrollPane;
 import java.awt.TextField;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class GUIMain {
-
-	public static void main(String[] args) {
-		Frame f = new Frame("测试窗口");
-		
+	Frame f = new Frame("测试窗口");
+	public void init(){
 //		Panel p = new Panel();
 //		p.add(new TextField(20));
 //		p.add(new Button("p测试窗口"));
@@ -53,6 +54,18 @@ public class GUIMain {
 		//设置窗口为最佳大小
 		f.pack();
 		f.setVisible(true);
+		
+		f.addWindowListener(new MyWindowListener());
+	}
+	
+	public static void main(String[] args) {
+		new GUIMain().init();
+	}
+	
+	class MyWindowListener extends WindowAdapter{
+		public void windowClosing(WindowEvent e) {
+			System.exit(0);
+		}
 	}
 
 }
