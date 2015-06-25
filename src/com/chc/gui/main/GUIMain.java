@@ -1,34 +1,71 @@
 package com.chc.gui.main;
 
+import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.ScrollPane;
 import java.awt.TextField;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class GUIMain {
-
-	public static void main(String[] args) {
-		Frame f = new Frame("æµ‹è¯•çª—å£");
-		
+	Frame f = new Frame("²âÊÔ´°¿Ú");
+	public void init(){
 //		Panel p = new Panel();
 //		p.add(new TextField(20));
-//		p.add(new Button("pæµ‹è¯•çª—å£"));
+//		p.add(new Button("p²âÊÔ´°¿Ú"));
 //		f.add(p);
 		
 //		ScrollPane sp = new ScrollPane(ScrollPane.SCROLLBARS_ALWAYS);
 //		sp.add(new TextField(20));
-//		sp.add(new Button("spæµ‹è¯•çª—å£"));
+//		sp.add(new Button("sp²âÊÔ´°¿Ú"));
 //		f.add(sp);
 		
-		f.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 5));
-		for (int i = 0; i < 100; i++) {
-			f.add(new Button("ï¿½ï¿½Å¥"+i));
+//		f.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 5));
+//		for (int i = 0; i < 100; i++) {
+//			f.add(new Button("°´Å¥" + i));
+//		}
+		
+//		f.setLayout(new BorderLayout(30, 5));
+//		f.add(new Button("ÄÏ"), BorderLayout.SOUTH);
+//		f.add(new Button("±±"), BorderLayout.NORTH);
+//		f.add(new Button("ÖĞ"), BorderLayout.CENTER);
+//		f.add(new Button("¶«"), BorderLayout.EAST);
+//		f.add(new Button("Î÷"), BorderLayout.WEST);
+		
+		//¼ÆËãÆ÷
+		Panel p1 = new Panel();
+		p1.add(new TextField(30));
+		f.setLayout(new BorderLayout());
+		f.add(p1, BorderLayout.NORTH);
+		Panel p2 = new Panel();
+		p2.setLayout(new GridLayout(3, 5, 4, 4));
+		String[] name = {"0","1","2","3","4","5","6","7","8","9","+","-","*","/","."};
+		//ÏòPanelÖĞÌí¼Ó15¸ö°´Å¥
+		for (int i = 0; i < name.length; i++) {
+			p2.add(new Button(name[i]));
 		}
-		//è®¾ç½®çª—å£ä¸ºæœ€ä½³å¤§å°
+		f.add(p2);
+		
+		//ÉèÖÃ´°¿ÚÎª×î¼Ñ´óĞ¡
 		f.pack();
 		f.setVisible(true);
+		
+		f.addWindowListener(new MyWindowListener());
+	}
+	
+	public static void main(String[] args) {
+		new GUIMain().init();
+	}
+	
+	class MyWindowListener extends WindowAdapter{
+		public void windowClosing(WindowEvent e) {
+			System.exit(0);
+		}
 	}
 
 }
