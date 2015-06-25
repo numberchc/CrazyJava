@@ -1,4 +1,4 @@
-package com.chc.gui.main;
+package com.chc.gui.awt;
 
 import java.util.Random;
 import java.awt.*;
