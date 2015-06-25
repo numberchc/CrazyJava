@@ -66,7 +66,11 @@ public class Gobang
 				// 将用户鼠标事件的坐标转换成棋子数组的坐标。
 				int xPos = (int)((e.getX() - X_OFFSET) / RATE);
 				int yPos = (int)((e.getY() - Y_OFFSET ) / RATE);
-				board[xPos][yPos] = "●";
+				String chess = "●";
+				if(System.currentTimeMillis()%2 == 0){
+					chess = "○";
+				}
+				board[xPos][yPos] = chess;
 				/*
 				电脑随机生成两个整数，作为电脑下棋的坐标，赋给board数组。
 				还涉及:
