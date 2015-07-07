@@ -1,9 +1,9 @@
 package com.chc.gui.swing;
 
 import java.util.*;
-
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.event.*;
 /**
@@ -124,27 +124,4 @@ public class JTabbedPaneTest
 		new JTabbedPaneTest().init();
 	}
 }  
-// 定义一个JPanel类扩展类，该类的对象包含多个纵向排列的JRadioButton控件
-// 且JPanel扩展类可以指定一个字符串作为TitledBorder
-class ButtonPanel extends JPanel
-{  
-	private ButtonGroup group;
-	public ButtonPanel(JTabbedPaneTest.ChangeAction action
-		, String title, String[] labels)
-	{  
-		setBorder(BorderFactory.createTitledBorder(BorderFactory
-			.createEtchedBorder(), title));
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		group = new ButtonGroup();
-		for (int i = 0; labels!= null && i < labels.length; i++)
-		{  
-			JRadioButton b = new JRadioButton(labels[i]);
-			b.setActionCommand(labels[i]);
-			add(b);
-			// 添加事件监听器
-			b.addActionListener(action);
-			group.add(b);
-			b.setSelected(i == 0);
-		}
-	}
-}
+
