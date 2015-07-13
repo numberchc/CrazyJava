@@ -14,7 +14,7 @@ import javax.imageio.*;
  * @author Yeeku.H.Lee kongyeeku@163.com
  * @version 1.0
  */
-public class ZoomImage
+public class ZoomImage 
 {
 	// 下面两个常量设置缩小后图片的大小
 	private final int WIDTH = 80;
