@@ -1,2 +1,2 @@
-# GUI
-GUI工程
+# Crazy Java 
+Example code
