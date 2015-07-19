@@ -1,4 +1,4 @@
-package com.chc.gui.main;
+package com.chc.gui.awt;
 
 import java.awt.BorderLayout;
 import java.awt.Button;

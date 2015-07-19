@@ -1,4 +1,4 @@
-package com.chc.gui.awt.copySerializable;
+package com.chc.gui.awt;
 
 import java.awt.datatransfer.*;
 import java.io.*;

@@ -1,4 +1,4 @@
-package com.chc.gui.awt.drag;
+package com.chc.gui.awt;
 
 import java.util.List;
 import java.io.*;

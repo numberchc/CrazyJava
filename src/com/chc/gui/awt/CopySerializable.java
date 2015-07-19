@@ -1,4 +1,4 @@
-package com.chc.gui.awt.copySerializable;
+package com.chc.gui.awt;
 
 import java.awt.*;
 import java.awt.event.*;

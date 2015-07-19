@@ -1,4 +1,4 @@
-package com.chc.gui.awt.copyImage;
+package com.chc.gui.awt;
 
 import java.awt.*;
 import java.awt.datatransfer.*;
