@@ -50,7 +50,7 @@ public class InsertContent
 	public static void main(String[] args) 
 		throws IOException
 	{
-		insert("InsertContent.java" , 45 , "插入的内容\r\n");
+		insert("./src/io/InsertContent.java" , 45 , "插入的内容\r\n");
 	}
 }
 

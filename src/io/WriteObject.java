@@ -11,17 +11,18 @@ import java.io.*;
  * @author Yeeku.H.Lee kongyeeku@163.com
  * @version 1.0
  */
-public class AppendContent
+public class WriteObject
 {
 	public static void main(String[] args) 
 	{
 		try(
-			//以读、写方式打开一个RandomAccessFile对象
-			RandomAccessFile raf = new RandomAccessFile("./file/out.txt" , "rw"))
+			// 创建一个ObjectOutputStream输出流
+			ObjectOutputStream oos = new ObjectOutputStream(
+				new FileOutputStream("./file/object.txt")))
 		{
-			//将记录指针移动到out.txt文件的最后
-			raf.seek(raf.length());
-			raf.write("追加的内容！\r\n".getBytes());
+			Person per = new Person("孙悟空", 500);
+			// 将per对象写入输出流
+			oos.writeObject(per);
 		}
 		catch (IOException ex)
 		{
@@ -29,3 +30,4 @@ public class AppendContent
 		}
 	}
 }
+
