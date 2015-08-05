@@ -1,6 +1,7 @@
 package io;
 
 import java.io.*;
+import java.util.*;
 /**
  * Description:
  * <br/>网站: <a href="http://www.crazyit.org">疯狂Java联盟</a> 
@@ -11,23 +12,24 @@ import java.io.*;
  * @author Yeeku.H.Lee kongyeeku@163.com
  * @version 1.0
  */
-public class TransientTest
+public class ReplaceTest
 {
 	public static void main(String[] args) 
 	{
 		try(
 			// 创建一个ObjectOutputStream输出流
 			ObjectOutputStream oos = new ObjectOutputStream(
-				new FileOutputStream("./file/transient.txt"));
+				new FileOutputStream("replace.txt"));
 			// 创建一个ObjectInputStream输入流
 			ObjectInputStream ois = new ObjectInputStream(
-				new FileInputStream("./file/transient.txt")))
+				new FileInputStream("replace.txt")))
 		{
-			Person1 per = new Person1("孙悟空", 500);
-			// 系统会per对象转换字节序列并输出
+			Person3 per = new Person3("孙悟空", 500);
+			// 系统将per对象转换字节序列并输出
 			oos.writeObject(per);
-			Person1 p = (Person1)ois.readObject();
-			System.out.println(p.getAge());
+			// 反序列化读取得到的是ArrayList
+			ArrayList list = (ArrayList)ois.readObject();
+			System.out.println(list);
 		}
 		catch (Exception ex)
 		{
@@ -35,3 +37,4 @@ public class TransientTest
 		}
 	}
 }
+

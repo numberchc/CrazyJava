@@ -10,13 +10,14 @@ package io;
  * @author Yeeku.H.Lee kongyeeku@163.com
  * @version 1.0
  */
-public class Person
+public class Person1
 	implements java.io.Serializable
 {
 	private String name;
-	private int age;
+	private transient int age;
+//	private int age;
 	// 注意此处没有提供无参数的构造器!
-	public Person(String name , int age)
+	public Person1(String name , int age)
 	{
 		System.out.println("有参数的构造器");
 		this.name = name;

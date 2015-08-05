@@ -1,5 +1,7 @@
 package io;
 
+import java.util.*;
+import java.io.*;
 /**
  * Description:
  * <br/>网站: <a href="http://www.crazyit.org">疯狂Java联盟</a> 
@@ -10,13 +12,13 @@ package io;
  * @author Yeeku.H.Lee kongyeeku@163.com
  * @version 1.0
  */
-public class Person
+public class Person3
 	implements java.io.Serializable
 {
 	private String name;
 	private int age;
 	// 注意此处没有提供无参数的构造器!
-	public Person(String name , int age)
+	public Person3(String name , int age)
 	{
 		System.out.println("有参数的构造器");
 		this.name = name;
@@ -44,4 +46,12 @@ public class Person
 		return this.age;
 	}
 
+	//	重写writeReplace方法，程序在序列化该对象之前，先调用该方法
+	private Object writeReplace()throws ObjectStreamException
+	{
+		ArrayList<Object> list = new ArrayList<>();
+		list.add(name);
+		list.add(age);
+		return list;
+	}
 }
