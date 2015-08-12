@@ -1,6 +1,5 @@
 package thread;
 
-import java.util.concurrent.locks.*;
 /**
  * Description:
  * <br/>网站: <a href="http://www.crazyit.org">疯狂Java联盟</a> 
@@ -11,16 +10,14 @@ import java.util.concurrent.locks.*;
  * @author Yeeku.H.Lee kongyeeku@163.com
  * @version 1.0
  */
-public class Account2
+public class Account1
 {
-	// 定义锁对象
-	private final ReentrantLock lock = new ReentrantLock();
 	// 封装账户编号、账户余额两个Field
 	private String accountNo;
 	private double balance;
-	public Account2(){}
+	public Account1(){}
 	// 构造器
-	public Account2(String accountNo , double balance)
+	public Account1(String accountNo , double balance)
 	{
 		this.accountNo = accountNo;
 		this.balance = balance;
@@ -42,41 +39,31 @@ public class Account2
 	}
 
 	// 提供一个线程安全draw()方法来完成取钱操作
-	public void draw(double drawAmount)
+	public synchronized void draw(double drawAmount)
 	{
-		// 加锁
-		lock.lock();
-		try
+		// 账户余额大于取钱数目
+		if (balance >= drawAmount)
 		{
-			// 账户余额大于取钱数目
-			if (balance >= drawAmount)
+			// 吐出钞票
+			System.out.println(Thread.currentThread().getName()
+				+ "取钱成功！吐出钞票:" + drawAmount);
+			try
 			{
-				// 吐出钞票
-				System.out.println(Thread.currentThread().getName()
-					+ "取钱成功！吐出钞票:" + drawAmount);
-				try
-				{
-					Thread.sleep(1);
-				}
-				catch (InterruptedException ex)
-				{
-					ex.printStackTrace();
-				}
-				// 修改余额
-				balance -= drawAmount;
-				System.out.println("\t余额为: " + balance);
+				Thread.sleep(1);
 			}
-			else
+			catch (InterruptedException ex)
 			{
-				System.out.println(Thread.currentThread().getName()
-					+ "取钱失败！余额不足！");
+				ex.printStackTrace();
 			}
+			// 修改余额
+			balance -= drawAmount;
+			System.out.println("\t余额为: " + balance);
 		}
-		finally
+		else
 		{
-			// 修改完成，释放锁
-			lock.unlock();
-		}		
+			System.out.println(Thread.currentThread().getName()
+				+ "取钱失败！余额不足！");
+		}
 	}
 
 	// 下面两个方法根据accountNo来重写hashCode()和equals()方法

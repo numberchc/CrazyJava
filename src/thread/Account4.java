@@ -1,5 +1,6 @@
 package thread;
 
+import java.util.concurrent.*;
 import java.util.concurrent.locks.*;
 /**
  * Description:
@@ -11,16 +12,21 @@ import java.util.concurrent.locks.*;
  * @author Yeeku.H.Lee kongyeeku@163.com
  * @version 1.0
  */
-public class Account2
+public class Account4
 {
-	// 定义锁对象
-	private final ReentrantLock lock = new ReentrantLock();
+	// 显式定义Lock对象
+	private final Lock lock = new ReentrantLock();
+	// 获得指定Lock对象对应的Condition
+	private final Condition cond  = lock.newCondition(); 
 	// 封装账户编号、账户余额两个Field
 	private String accountNo;
 	private double balance;
-	public Account2(){}
+	//标识账户中是否已有存款的旗标
+	private boolean flag = false;
+
+	public Account4(){}
 	// 构造器
-	public Account2(String accountNo , double balance)
+	public Account4(String accountNo , double balance)
 	{
 		this.accountNo = accountNo;
 		this.balance = balance;
@@ -41,42 +47,72 @@ public class Account2
 		return this.balance;
 	}
 
-	// 提供一个线程安全draw()方法来完成取钱操作
 	public void draw(double drawAmount)
 	{
 		// 加锁
 		lock.lock();
 		try
 		{
-			// 账户余额大于取钱数目
-			if (balance >= drawAmount)
+			// 如果flag为假，表明账户中还没有人存钱进去，取钱方法阻塞
+			if (!flag)
 			{
-				// 吐出钞票
-				System.out.println(Thread.currentThread().getName()
-					+ "取钱成功！吐出钞票:" + drawAmount);
-				try
-				{
-					Thread.sleep(1);
-				}
-				catch (InterruptedException ex)
-				{
-					ex.printStackTrace();
-				}
-				// 修改余额
-				balance -= drawAmount;
-				System.out.println("\t余额为: " + balance);
+				cond.await();
 			}
 			else
 			{
-				System.out.println(Thread.currentThread().getName()
-					+ "取钱失败！余额不足！");
+				// 执行取钱
+				System.out.println(Thread.currentThread().getName() 
+					+ " 取钱:" +  drawAmount);
+				balance -= drawAmount;
+				System.out.println("账户余额为：" + balance);
+				// 将标识账户是否已有存款的旗标设为false。
+				flag = false;
+				// 唤醒其他线程
+				cond.signalAll();
 			}
 		}
+		catch (InterruptedException ex)
+		{
+			ex.printStackTrace();
+		}
+		// 使用finally块来释放锁
 		finally
 		{
-			// 修改完成，释放锁
 			lock.unlock();
-		}		
+		}
+	}
+	public void deposit(double depositAmount)
+	{
+		lock.lock();
+		try
+		{
+			// 如果flag为真，表明账户中已有人存钱进去，则存钱方法阻塞
+			if (flag)             //①
+			{
+				cond.await();
+			}
+			else
+			{
+				// 执行存款
+				System.out.println(Thread.currentThread().getName()
+					+ " 存款:" +  depositAmount);
+				balance += depositAmount;
+				System.out.println("账户余额为：" + balance);
+				// 将表示账户是否已有存款的旗标设为true
+				flag = true;
+				// 唤醒其他线程
+				cond.signalAll();
+			}
+		}
+		catch (InterruptedException ex)
+		{
+			ex.printStackTrace();
+		}
+		// 使用finally块来释放锁
+		finally
+		{
+			lock.unlock();
+		}
 	}
 
 	// 下面两个方法根据accountNo来重写hashCode()和equals()方法
