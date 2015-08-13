@@ -1,3 +1,4 @@
+package net;
 
 import java.io.*;
 import java.net.*;
@@ -116,11 +117,11 @@ public class GetPostTest
 	public static void main(String args[])
 	{
 		// 发送GET请求
-		String s = GetPostTest.sendGet("http://localhost:8888/abc/a.jsp"
+		String s = GetPostTest.sendGet("http://localhost:8080/test/a.jsp"
 			, null);
 		System.out.println(s);
 		// 发送POST请求
-		String s1 = GetPostTest.sendPost("http://localhost:8888/abc/login.jsp"
+		String s1 = GetPostTest.sendPost("http://localhost:8080/test/login.jsp"
 			, "name=crazyit.org&pass=leegang");
 		System.out.println(s1);
 	}
