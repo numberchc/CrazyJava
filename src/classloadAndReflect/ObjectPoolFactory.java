@@ -1,3 +1,4 @@
+package classloadAndReflect;
 
 import java.util.*;
 import java.io.*;
@@ -61,7 +62,7 @@ public class ObjectPoolFactory
 		throws Exception
 	{
 		ObjectPoolFactory pf = new ObjectPoolFactory();
-		pf.initPool("obj.txt");
+		pf.initPool("file/obj.txt");
 		System.out.println(pf.getObject("a"));      //¢Ù
 		System.out.println(pf.getObject("b"));      //¢Ú
 	}

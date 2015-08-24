@@ -20,7 +20,7 @@ public class FilesTest
 		throws Exception
 	{
 		// 复制文件
-		Files.copy(Paths.get("./src/io/FilesTest.java") 
+		Files.copy(Paths.get("src/io/FilesTest.java") 
 			, new FileOutputStream("./file/a.txt"));
 		// 判断FilesTest.java文件是否为隐藏文件
 		System.out.println("FilesTest.java是否为隐藏文件："

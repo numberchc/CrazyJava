@@ -1,3 +1,4 @@
+package classloadAndReflect;
 
 import java.util.*;
 import java.io.*;
@@ -98,7 +99,7 @@ public class ExtendedObjectPoolFactory
 		throws Exception
 	{
 		ExtendedObjectPoolFactory epf = new ExtendedObjectPoolFactory();
-		epf.init("extObj.txt");
+		epf.init("file/extObj.txt");
 		epf.initPool();
 		epf.initProperty();
 		System.out.println(epf.getObject("a"));
